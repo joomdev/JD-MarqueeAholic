@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>JD MarqueeAholic</name>
+	<creationDate>October 2013</creationDate>
+	<version>1.5.0</version>
+	<author>JoomDev (Formerly GraphicAholic)</author>
+	<copyright>Copyright (C) 2020 Joomdev, Inc. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>info@joomdev.com</authorEmail>
+	<authorUrl>https://www.joomdev.com</authorUrl>
+
+	<description>
+	<![CDATA[
+		<div class="alert alert-info" style="font-weight: normal;">
+			<h3>JD MarqueeAholic</h3>
+			<p>JD MarqueeAholic is an option rich scrolling marquee module for your Joomla 3.x website. You can customize JD MarqueeAholic to your website's demanding look and feel using any or all of the module options JD MarqueeAholic gives you</p>
+			<p>JD MarqueeAholic formerly known as MarqueeAholic  from Graphicaholic is now moved to JoomDev along with other Extensions. <strong>Check out the <a href="https://www.joomdev.com/graphicaholic" target="_blank">Announcement here.</a></strong></p>
+			<a href="https://www.joomdev.com/forum/jd-marqueeaholic" target="_blank">Support</a> | <span>Demo</span> | <a href="https://www.joomdev.com/products/extensions/jd-marqueeaholic" target="_blank">More Details</a>
+		</div>
+	]]>
+	</description>
+
+	<files>
+		<filename module="mod_marqueeaholic">mod_marqueeaholic.php</filename>
+		<folder>js</folder>
+		<folder>fields</folder>
+		<folder>images</folder>
+		<folder>tmpl</folder>
+		<folder>helpers</folder>
+		<folder>css</folder>
+		<filename>index.html</filename>
+		<filename>mod_marqueeaholic.xml</filename>
+	</files>
+
+	<updateservers>
+		<server type="extension" priority="1" name="JD MarqueeAholic">https://joomdev.com/updates/marqueeaholic.xml</server>
+	</updateservers>
+
+	<config>
+		<fields name="params" addfieldpath="/modules/mod_marqueeaholic/fields">
+			<!-- General Settings -->
+			<fieldset name="general" group="general" label="General Settings">
+				<field name="note03" type="note" showon="outsideSource:3" label="View the Category Settings tab to set Joomla Category specific options." />
+				<field name="outsideSource" type="list" class="btn-group" default="0" label="Data from external source?" description="Select what type of Marquee to use.">
+					<option value="0">Custom Data Marquee</option>
+					<option value="1">Text File Marquee</option>
+					<option value="2">RSS Feed Marquee</option>
+					<option value="3">Joomla Category Marquee</option>
+				</field>
+				<field name="externalURL" showon="outsideSource:1,2" type="text" size="45" default="#" label="External URL" description="If your text file is located within your Joomla! install do not include http://, https://, or your domain name. Just type in the 'filename.extension' and include any subfolder where your text file resides. On the other hand, if the text file resides on another domain, you need to include http://, https://, the domain name and any additional subfolders.) or RSS Feed to scroll (the same pathing rules apply with RSS Feeds as with using text files)." />
+				<field name="rssDisplay" showon="outsideSource:2" type="list" class="btn-group" default="0" label="RSS Display Options" description="Display how to show RSS feeds.">
+					<option value="0">RSS Title Only</option>
+					<option value="1">RSS Title and Date Only</option>
+					<option value="2">RSS Title and Article Only</option>
+					<option value="3">RSS Title, Date and Article</option>
+				</field>
+				<field name="feedCount" showon="outsideSource:2" type="text" size="45" default="5" label="Number of RSS Feeds" description="Number of RSS Feeds to scroll." />
+
+				<field name="wordCount" showon="outsideSource:1,2,3" type="text" size="45" default="100" label="Character count to scroll" description="Number of characters within text file, RSS Description or Joomla Category Articles characters to scroll." />
+				<field name="marqueeText" showon="outsideSource:0" type="textarea" filter="raw" cols="50" rows="8" default="" label="Marquee text" description="Enter text for marquee. Basic HTML tags supported." />
+				<field name="marqueeURL" showon="outsideSource:0" type="radio" class="btn-group" default="0" label="Hyperlink marquee?" description="Yes or No option">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="note01" showon="marqueeURL:1" filter="raw" type="note" label="PLEASE NOTE: when using this feature, make sure you do not have any Hyperlink tags in your Marquee text data. Any hyperlink tags will override this feature and the associated options." />
+				<field name="hyperLink" showon="outsideSource:0[AND]marqueeURL:1" type="text" size="45" default="#" label="Hyperlink" description="JD MarqueeAholic hyperlink" />
+				<field name="linkWindow" showon="outsideSource:0,2[AND]marqueeURL:1" type="list" default="self" label="Hyperlink window" description="Select to open link in a new window - tab or same">
+					<option value="blank">New Window or Tab</option>
+					<option value="self">Same Window</option>
+				</field>
+				<field name="marqueeFontFamily" showon="outsideSource:0,1,2" type="list" default="Default" label="Font Style" description="Select the font style you wish to use. Default will render your template's assigned font family.">
+					<option value=" ">Default</option>
+					<option value="Georgia, serif">Georgia</option>
+					<option value="Palatino Linotype, Book Antiqua, Palatino, serif">Palatino Linotype</option>
+					<option value="Times New Roman, Times, serif">Times New Roman</option>
+					<option value="Arial, Helvetica, sans-serif">Arial</option>
+					<option value="Arial Black, Gadget, sans-serif">Arial Black</option>
+					<option value="Impact, Charcoal, sans-serif">Impact</option>
+					<option value="Comic Sans MS, cursive, sans-serif">Comic Sans MS</option>
+					<option value="Lucida Sans Unicode, Lucida Grande, sans-serif">Lucida Sans Unicode</option>
+					<option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+					<option value="Trebuchet MS, Helvetica, sans-serif">Trebuchet MS</option>
+					<option value="Verdana, Geneva, sans-serif">Verdana</option>
+					<option value="Courier New, Courier, monospace">Courier New</option>
+					<option value="Lucida Console, Monaco, monospace">Lucida Console</option>
+				</field>
+				<field name="marqueeFontColor" showon="outsideSource:0,1,2,3" type="truecolors" default="" label="Marquee font color" format="rgb" opacity="1.0" description="Leave blank to use your templates default settings" />
+				<field name="marqueeFontHoverColor" showon="outsideSource:0,1,2" type="truecolors" default="" label="Marquee link color" format="rgb" opacity="1.0" description="Leave blank to use your templates default settings" />
+				<field name="marqueeFontLinkColor" showon="outsideSource:0,1,2" type="truecolors" default="" label="Marquee link hover color" format="rgb" opacity="1.0" description="Leave blank to use your templates default settings" />
+				<field name="marqueeBackground" type="truecolors" default="" label="Marquee background color" format="rgb" opacity="1.0" description="Leave blank to use your templates default settings" />
+				<field name="marqueeBorderStyle" type="list" default="none" label="Border style" description="Select to your needs">
+					<option value="none">None</option>
+					<option value="solid">Solid</option>
+					<option value="dotted">Dotted</option>
+					<option value="dashed">Dashed</option>
+					<option value="double">Double</option>
+					<option value="groove">Groove</option>
+					<option value="ridge">Ridge</option>
+					<option value="inset">Inset</option>
+					<option value="outset">Outset</option>
+				</field>
+				<field name="marqueeBorder" showon="marqueeBorderStyle:solid,dotted,dashed,double,groove,ridge,inset,outset" type="text" default="" label="Marquee border size" description="Remember to include px after your custom value. Leave blank to use your templates default settings" />
+				<field name="marqueeBorderColor" showon="marqueeBorderStyle:solid,dotted,dashed,double,groove,ridge,inset,outset" type="truecolors" default="" label="Marquee border color" format="rgb" opacity="1.0" description="Leave blank to use your templates default settings" />
+				<field name="marqueeFontSize" showon="outsideSource:0,1,2,3" type="text" default="" label="Marquee font size" description="Include px or em after your value or leave blank to use your templates default settings" />
+				<field name="marqueeFontlineheight" showon="outsideSource:0,1,2,3" type="text" default="" label="Marquee font line-height" description="Include px or em after your value or leave blank to use your templates default settings. Adjusting this value will assist you in centering your text inside your marquee box height." />
+				<field name="marqueeHeight" type="text" default="auto" label="Marquee module height" description="Adjust as needed for overall module height. Include px or em after your value." />
+				<field name="marqueeWidth" type="text" default="auto" label="Marquee width" description="Adjust as needed. Suggestion: Use percentages to maintain responsive layout. Include px, em or % after your value" />
+				<field name="marqueeBottomMargin" type="text" default="0px" label="Marquee bottom margin" description="Adjust as needed. Include px or em after your value." />
+				<field name="marqueeSpeed" type="text" default="10000" label="Marquee speed" description="" />
+				<field name="marqueeGap" showon="marqueeDuplication:1" type="text" default="50" label="Gap between tickers" description="" />
+				<field name="marqueeDelay" type="text" default="0" label="Delay before start" description="" />
+				<field name="marqueeDirection" type="list" default="left" label="Marquee direction" description="Select to your needs">
+					<option value="left">Scroll to the Left</option>
+					<option value="right">Scroll to the Right</option>
+					<option value="up">Scroll Bottom to Top</option>
+					<option value="down">Scroll Top to Bottom</option>
+				</field>
+				<field name="marqueeForceDirection" showon="marqueeDirection:left,right" type="list" default="initial" label="Force right to left direction" description="Yes or No option. Set to Yes if your Joomla install is a Right to Left layout.">
+					<option value="initial">JNO</option>
+					<option value="ltr">JYES</option>
+				</field>
+				<field name="feedSpacing" showon="marqueeDirection:up,down[AND]outsideSource:0,1,2" type="list" default="oneSpacing" label="Spacing between feeds" description="Select to your needs">
+					<option value="oneSpacing">Single spacing</option>
+					<option value="twoSpacing">Double spacing</option>
+					<option value="threeSpacing">Tripple spacing</option>
+					<option value="fourSpacing">Double-Double spacing</option>
+				</field>
+				<field name="marqueeDuplication" type="radio" class="btn-group" default="0" label="Duplicate marquee" description="Yes or No option">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="marqueePause" type="radio" class="btn-group" default="1" label="Pause on hover" description="Yes or No option">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+			</fieldset>
+			<fieldset name="category" group="category" label="Category Settings">
+				<field name="note02" type="note" showon="outsideSource:0,1,2" label="Choose Joomla Category Marquee in General Settings tab to view options" />
+				<field name="catid" type="category" showon="outsideSource:3" label="JCATEGORY" description="Select Articles from a specific Category or a set of Categories. If no selection will show all categories as default." extension="com_content" multiple="true" class="multipleCategories" default="" size="10" />
+				<field name="tag" type="tag" showon="outsideSource:3" label="JTAG" description="JTAG_DESC" mode="nested" multiple="true" class="multipleTags" />
+				<field name="image" type="hidden" showon="outsideSource:3" label="Show Images" description="Display Article Images?" class="btn-group btn-group-yesno" default="1">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="hyperlinkMarquee" type="list" showon="outsideSource:3" label="Link" description="Select to link the article, title, both article and title to that specific Joomla article or none." default="3">
+					<option value="0">Title Only</option>
+					<option value="1">Article Only</option>
+					<option value="2">Both Article and Title</option>
+					<option value="3">None</option>
+				</field>
+				<field name="item_title" type="radio" showon="outsideSource:3" label="Show Article Title" description="Show or hide the Article title." class="btn-group btn-group-yesno" default="0">
+					<option value="1">JSHOW</option>
+					<option value="0">JHIDE</option>
+				</field>
+				<field name="titleSize" type="text" showon="item_title:1[AND]outsideSource:3" label="Title font size" description="Set to your specific needs. Please include px or em after your font size value." default="14px" />
+				<field name="titlePosition" type="list" showon="outsideSource:3[AND]marqueeDirection:up,down" label="Title Position" description="Article title position." default="left">
+					<option value="left">Left</option>
+					<option value="center">Center</option>
+				</field>
+				<field name="triggerevents" type="hidden" showon="outsideSource:3" label="Trigger Plugin Events" description="Triggers additional plugin events to display additional content like custom fields or voting information." class="btn-group btn-group-yesno" default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="show_introtext" type="radio" showon="outsideSource:3" label="Show Intro Text" description="Show or hide the article intro text." default="1" class="btn-group btn-group-yesno">
+					<option value="1">JSHOW</option>
+					<option value="0">JHIDE</option>
+				</field>
+				<field name="count" type="number" showon="outsideSource:3" label="Number of Articles" description="The number of Articles to display within this module." default="5" />
+				<field name="show_featured" type="list" showon="outsideSource:3" label="Featured Articles" description="Show or hide articles marked as featured." default="">
+					<option value="">JSHOW</option>
+					<option value="0">JHIDE</option>
+					<option value="1">Only show Featured Articles</option>
+				</field>
+				<field name="supportingTags" type="textarea" showon="outsideSource:3" label="Allowed HTML article tags" filter="raw" description="Type in the supporting HTML article tags you would want to be allowed. Example: &#60;br&#62;&#60; br &#62;&#60; p &#62;&#60; center &#62;&#60;br&#62;will allow the for single line spaces, bold and center to be used in your marquee.&#60;b&#62; PLEASE NOTE: do not add ANY spaces inside the brackets.&#60;/b&#62; Also, whatever you turn-on will have to be turned-off. Example: &#60;br&#62;&#60; &#47;br &#62;&#60; &#47;p &#62;&#60; &#47;center &#62;&#60;br&#62;" default="" rows="10" />
+				<field name="ordering" type="list" showon="outsideSource:3" label="Order Results" description="Select the order in which you want query results presented." default="a.publish_up">
+					<option value="a.publish_up">Published Date</option>
+					<option value="a.created">Created Date</option>
+					<option value="a.modified">Modified Date</option>
+					<option value="a.ordering">Ordering</option>
+					<option value="a.hits">JGLOBAL_HITS</option>
+					<option value="rand()">Random</option>
+				</field>
+				<field name="direction" type="list" label="JGLOBAL_ORDER_DIRECTION_LABEL" description="JGLOBAL_ORDER_DIRECTION_DESC" default="1" showon="outsideSource:3">
+					<option value="0">JGLOBAL_ORDER_ASCENDING</option>
+					<option value="1">JGLOBAL_ORDER_DESCENDING</option>
+				</field>
+			</fieldset>
+			<!-- Advanced Settings -->
+			<fieldset name="advanced" group="advanced">
+				<field name="loadScripts" type="list" default="1" label="Load script files inline?" description="By selecting Yes, you are allowing JD PopupAholic to load it's supporting script files in between the body tags and not in the head tags, where they properly belong. This option is available because other installed extension(s) on your site or your template are improperly loading the jQuery Library script.">
+					<option value="1">JNO</option>
+					<option value="2">JYES</option>
+				</field>
+				<field name="loadjQuery" showon="loadScripts:2" type="radio" class="btn-group" default="0" label="Load jQuery Library?" description="By selecting Yes, you are allowing JD MarqueeAholic to load the jQuery Library script inline. This option was added to combat other Joomla! template or extension developers who choose not to follow the Joomla! 3.x guidelines on properly handling the jQuery Library script load. Having to add this option angers me greatly because NOW this extension is not following the Joomla! 3.x jQuery Library guidelines. By setting this option to 'Yes' just to get JD MarqueeAholic to work is just wrong! However, because other Joomla! extension or template developers choose not to follow these quidelines, I must fight fire with more fire... Please adjust this setting at your own risk!">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="fieldMODULECLASSSUFFIX" />
+				<field name="cache" type="radio" class="btn-group" default="1" label="Caching" description="Select whether to cache the content of this module">
+					<option value="1">Use global</option>
+					<option value="0">No caching</option>
+				</field>
+				<field name="cache_time" type="text" default="900" label="Cache Time" description="The time before the module is recached" />
+				<field name="documentation" type="docs" default="900" label="" description="" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
