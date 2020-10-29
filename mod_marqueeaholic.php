@@ -1,11 +1,11 @@
 <?php
 /*-------------------------------------------------------------------------------
-# JD MarqueeAholic - Marquee module for Joomla 3.x v1.5.0
+# MarqueeAholic - Marquee module for Joomla 3.x v1.5.0
 # -------------------------------------------------------------------------------
-# author    JoomDev (Formerly GraphicAholic)
-# copyright Copyright (C) 2020 Joomdev, Inc. All rights reserved.
-# @license - GNU General Public License version 2 or later
-# Websites: https://www.joomdev.com
+# author    GraphicAholic
+# copyright Copyright (C) 2011 GraphicAholic.com. All Rights Reserved.
+# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+# Websites: http://www.graphicaholic.com
 --------------------------------------------------------------------------------*/
 // No direct access
 defined('_JEXEC') or die('Restricted access');
@@ -36,6 +36,12 @@ $marqueeURL	= $params->get('marqueeURL');
 $outsideSource	= $params->get('outsideSource');
 $externalURL	= $params->get('externalURL');
 $wordCount	= $params->get('wordCount');
+
+$rssurl = $params->get('rssurl');
+$word_count = $params->get('word_count');
+$rsstitle = $params->get('rsstitle');
+$rssitems = $params->get('rssitems');
+
 $feedCount	= $params->get('feedCount');
 $linkWindow	= $params->get('linkWindow');
 $rssDisplay	= $params->get('rssDisplay');
@@ -59,7 +65,38 @@ $list            = ModMarqueeAholicHelper::getList($params);
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
 
 require JModuleHelper::getLayoutPath('mod_marqueeaholic', $params->get('layout', 'default'));
-} else {
+} 
+
+if($outsideSource == 2) {
+// Include the feed functions only once
+JLoader::register('ModMarqueeHelper', __DIR__ . '/helpers/rsshelper.php');
+
+$rssurl = $params->get('rssurl', '');
+$rssrtl = $params->get('rssrtl', 0);
+
+// Check if feed URL has been set
+if (empty ($rssurl))
+{
+	echo '<div>';
+	echo JText::_('MOD_FEED_ERR_NO_URL');
+	echo '</div>';
+
+	return;
+}
+
+$feed = ModMarqueeHelper::getFeed($params);
+$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
+
+require JModuleHelper::getLayoutPath('mod_marqueeaholic', $params->get('layout', 'default'));    
+} 
+
+if($outsideSource == 1) {
 require JModuleHelper::getLayoutPath('mod_marqueeaholic','default',$params);
 }
+
+if($outsideSource == 0) {
+require JModuleHelper::getLayoutPath('mod_marqueeaholic','default',$params);
+}
+
+
 ?>

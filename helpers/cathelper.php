@@ -2,8 +2,8 @@
 /**
  * @package     Joomla.Site
  * @subpackage  mod_articles_news
- * @subpackage  edited by JoomDev (Formerly GraphicAholic) for JD MarqueeAholic
- * @copyright   Copyright (C) 2020 Joomdev, Inc. All rights reserved.
+ * @subpackage  edited by GraphicAholic for MarqueeAholic
+ * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
